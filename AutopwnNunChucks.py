@@ -13,9 +13,7 @@ if len(sys.argv) < 2:
 
 ipHost = sys.argv[1]
 nunIP = 'https://store.nunchucks.htb/api/submit'
-burp = {'http' : 'http://127.0.0.1:8080'}
 s = requests.Session()
-s.proxies = burp
 
 def html_payload():
 
