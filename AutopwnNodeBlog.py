@@ -2,11 +2,11 @@ import requests,sys,base64
 from pwn import *
 from os import system
 
-def def_handler(sig, frame):
+def controlc(sig, frame):
     print("\n\n[!] saliendo...\n")
     sys.exit(1)
 
-signal.signal(signal.SIGINT, def_handler)
+signal.signal(signal.SIGINT, controlc)
 
 if len(sys.argv) < 2:
     print(f'[!] Uso: python3 {sys.argv[0]} "Tu IP"\n' )
